@@ -68,7 +68,7 @@ class _ImageManagerShellState extends State<ImageManagerShell> {
         final List<ImageID> imaginaryIDs = preset.pages!.mapIndexed((index, preset) {
             if(preset.replaceID != null) return preset.replaceID!;
             return "${index + listLength}";
-        }).toList();
+        }).toList(); // bogus change
         
         for (final (index, imagePreset) in preset.pages!.indexed) {
             if(isCorelated && preset.pages!.length > 1) {
@@ -86,9 +86,7 @@ class _ImageManagerShellState extends State<ImageManagerShell> {
         if(context.mounted) context.pop();
 
         final gitRes = await ShellExecutor.executeCommands([
-            "git add -A & git commit -m \"auto-push\" & git push origin master",
-            "git commit -m \"auto-push\"",
-            "git push origin master"
+            "git add -A; git commit -m \"auto-push\"; git push origin master"
         ]);
 
         print(gitRes);
