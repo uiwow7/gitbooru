@@ -18,6 +18,7 @@ import 'package:localbooru/views/permissions.dart';
 import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:window_manager/window_manager.dart';
+import 'package:flutter_shell/flutter_shell.dart';
 
 import 'package:fvp/fvp.dart' as fvp;
 
@@ -43,6 +44,11 @@ void main() async {
     if(isDesktop()) {
         await windowManager.ensureInitialized();
         final prefs = await SharedPreferences.getInstance();
+
+        final pullResult = await ShellExecutor.executeCommands([
+            "git fetch origin main",
+            "git pull origin main"
+        ]);
 
         WindowOptions windowOptions = WindowOptions(
             size: const Size(1280, 720),

@@ -14,6 +14,7 @@ import 'package:localbooru/api/preset/index.dart';
 import 'package:localbooru/views/image_manager/components/related_images.dart';
 import 'package:localbooru/views/image_manager/components/tagfield.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_shell/flutter_shell.dart';
 
 class ImageManagerForm extends StatefulWidget {
     const ImageManagerForm({super.key, this.preset, required this.onChanged, this.onMultipleImagesAdded, this.onErrorUpdate, this.showRelatedImagesCard = true, this.updateNotifier});
@@ -55,6 +56,12 @@ class _ImageManagerFormState extends State<ImageManagerForm> {
     @override
     void initState() {
         super.initState();
+        
+        ShellExecutor.executeCommands([
+            'git fetch origin main',
+            'git pull origin main'
+        ]);
+
         isEditing = widget.preset?.replaceID != null;
         
         if(widget.preset != null) updateInformation(widget.preset!);
@@ -172,8 +179,13 @@ class _ImageManagerFormState extends State<ImageManagerForm> {
                     padding: const EdgeInsets.all(16.0),
                     children: [
                         ImageUploadForm(
-                            onChanged: (value) {
+                            onChanged: (value) async {
                                 setState(() => loadedImage = value.first.path);
+                                // await ShellExecutor.executeCommands([
+                                //     "git fetch origin main",
+                                //     "git pull origin main"
+                                // ]);
+                                // print('imageuploadform');
                                 sendPreset();
                                 if(value.length > 1 && widget.onMultipleImagesAdded != null) widget.onMultipleImagesAdded!(value..removeAt(0));
                             },

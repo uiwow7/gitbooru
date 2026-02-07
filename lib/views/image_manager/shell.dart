@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_shell/flutter_shell.dart';
 import 'package:go_router/go_router.dart';
 import 'package:localbooru/api/index.dart';
 import 'package:localbooru/api/preset/index.dart';
@@ -83,6 +84,14 @@ class _ImageManagerShellState extends State<ImageManagerShell> {
         if(saveCollection) await insertCollection(PresetCollection.fromVirtualPresetCollection(preset));
         
         if(context.mounted) context.pop();
+
+        final gitRes = await ShellExecutor.executeCommands([
+            "git add -A; git commit -m \"auto-push\"; git push origin main",
+            "git commit -m \"auto-push\"",
+            "git push origin main"
+        ]);
+
+        print(gitRes);
     }
 
     String generateName(PresetImage imagePreset) {

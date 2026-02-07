@@ -81,6 +81,7 @@ dependencies:
   visibility_detector: ^0.4.0+2
   fc_native_video_thumbnail: ^0.17.2
   dynamic_system_colors: ^1.8.0
+  flutter_shell: ^0.0.2
 
 dev_dependencies:
   flutter_test:
