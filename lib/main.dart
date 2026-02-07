@@ -46,8 +46,8 @@ void main() async {
         final prefs = await SharedPreferences.getInstance();
 
         final pullResult = await ShellExecutor.executeCommands([
-            "git fetch origin main",
-            "git pull origin main"
+            "git fetch origin master",
+            "git pull origin master"
         ]);
 
         WindowOptions windowOptions = WindowOptions(

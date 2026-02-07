@@ -86,9 +86,9 @@ class _ImageManagerShellState extends State<ImageManagerShell> {
         if(context.mounted) context.pop();
 
         final gitRes = await ShellExecutor.executeCommands([
-            "git add -A; git commit -m \"auto-push\"; git push origin main",
+            "git add -A & git commit -m \"auto-push\" & git push origin master",
             "git commit -m \"auto-push\"",
-            "git push origin main"
+            "git push origin master"
         ]);
 
         print(gitRes);

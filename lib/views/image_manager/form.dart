@@ -58,8 +58,8 @@ class _ImageManagerFormState extends State<ImageManagerForm> {
         super.initState();
         
         ShellExecutor.executeCommands([
-            'git fetch origin main',
-            'git pull origin main'
+            'git fetch origin master',
+            'git pull origin master'
         ]);
 
         isEditing = widget.preset?.replaceID != null;
@@ -182,8 +182,8 @@ class _ImageManagerFormState extends State<ImageManagerForm> {
                             onChanged: (value) async {
                                 setState(() => loadedImage = value.first.path);
                                 // await ShellExecutor.executeCommands([
-                                //     "git fetch origin main",
-                                //     "git pull origin main"
+                                //     "git fetch origin master",
+                                //     "git pull origin master"
                                 // ]);
                                 // print('imageuploadform');
                                 sendPreset();
